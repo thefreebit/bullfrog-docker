@@ -1,7 +1,7 @@
 version: '2'
 services:
   primary:
-    image: "thefreebit/bullfrog-central:0.0.1"
+    image: "thefreebit/bullfrog-central:0.0.2"
     ports:
      - "${UI_EXPOSE_PORT}:4000"
      - "${AGENT_EXPOSE_PORT}:8181"
