@@ -16,7 +16,7 @@ populatePropertyIfNeeded() {
     then
         local PROP=$(quoteSubst "$1")
         local VAL=$(quoteSubst "$2")
-        sed -ri.bak "s/^${PROP}=/${PROP}=$VAL/g" bullfrog-central.properties
+        sed -ri "s/^${PROP}=/${PROP}=$VAL/g" bullfrog-central.properties
     fi
 }
 
@@ -35,6 +35,18 @@ populatePropertyIfNeeded "cassandra.contactPoints" $CASSANDRA_URL
 populatePropertyIfNeeded "cassandra.username" $CASSANDRA_USERNAME
 populatePropertyIfNeeded "cassandra.password" $CASSANDRA_PASSWORD
 populatePropertyIfNeeded "cassandra.keyspace" $CASSANDRA_KEYSPACE
-populatePropertyIfNeeded "cassandra.contactPoints" $CASSANDRA_CONSISTENCY
+populatePropertyIfNeeded "cassandra.consistencyLevel" $CASSANDRA_CONSISTENCY
+populatePropertyIfNeeded "grpc.bindAddress" $GRPC_BIND_ADDRESS
+populatePropertyIfNeeded "grpc.httpPort" $GRPC_HTTP_PORT
+populatePropertyIfNeeded "grpc.httpsPort" $GRPC_HTTPS_PORT
+populatePropertyIfNeeded "ui.bindAddress" $UI_BIND_ADDRESS
+populatePropertyIfNeeded "ui.port" $UI_PORT
+populatePropertyIfNeeded "ui.https" $UI_HTTPS
+populatePropertyIfNeeded "ui.contextPath" $UI_CONTEXT_PATH 
 
-java -jar ${JAVA_OPTS} bullfrog-central.jar
+if [ -z ${JAVA_OPTS} ]
+then
+	java -jar bullfrog-central.jar
+else
+	java -jar ${JAVA_OPTS} bullfrog-central.jar
+fi
