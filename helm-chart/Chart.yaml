@@ -1,0 +1,10 @@
+apiVersion: v1
+name: bullfrog
+version: 1.0.0
+appVersion: 1.0.0
+kubeVersion: "^1.8.0-0"
+description: bullfrog - artifactory monitoring service
+home: https://hub.docker.com/r/thefreebit/bullfrog-central
+maintainers:
+  - name: dave
+    email: dave.e@taboola.com
